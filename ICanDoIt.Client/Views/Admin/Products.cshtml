@@ -1,0 +1,84 @@
+﻿@model ProductListViewModel
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@await Html.PartialAsync("_AdminNavbar")
+@await Html.PartialAsync("_AdminSideBar")
+
+<div class="content-wrapper container">
+    @if (TempData["message"] != null)
+    {
+        var message = JsonConvert.DeserializeObject<AlertMessage>(TempData["message"] as string);
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-@message.AlertType">
+                    @message.Message
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h3">Admin Products</h1>
+            <hr>
+            <a class="btn btn-primary btn-sm" href="/admin/createproduct">Add Product</a>
+            <table id="productTable" class="table table-bordered mt-3" data-ordering="false">
+                <thead>
+                    <tr>
+                        <td class="adminTd" style="width: 30px;">Id</td>
+                        <td class="adminTd" style="width: 100px;">Image</td>
+                        <td class="adminTd">Name</td>
+                        <td class="adminTd" style="width: 20px;">Price</td>
+                        <td class="adminTd" style="width: 20px;">Stock</td>
+                        <td class="adminTd" style="width: 150px;"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Products.Count() > 0)
+                    {
+                        @foreach (var item in Model.Products)
+                        {
+                    <tr>
+                        <td class="adminTd">@item.Id</td>
+                        <td class="adminTd"><img src="~/Images/@item.ImageUrl" width="80"></td>
+                        <td class="adminTd">@item.Name</td>
+                        <td class="adminTd">@item.Price</td>
+                        <td class="adminTd">
+                            @if (item.isStock)
+                            {
+                                <i class="fas fa-check-circle"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-times-circle"></i>
+                            }
+                        </td>
+                        <td class="adminTd">
+                            <a href="/admin/editproduct/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+
+                            <form action="/admin/deleteproduct/@item.Id" method="POST" style="display: inline;">
+                                <input type="hidden" name="productId" value="@item.Id">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <h3>No Products</h3>
+                        </div>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+

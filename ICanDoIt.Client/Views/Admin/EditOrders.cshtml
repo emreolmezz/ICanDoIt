@@ -1,0 +1,65 @@
+﻿@model EditOrderModel
+@{
+    ViewData["Title"] = "EditOrders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@await Html.PartialAsync("_AdminNavbar")
+@await Html.PartialAsync("_AdminSideBar")
+
+
+<div class="content-wrapper container">
+    <h1 class="h3">Edit Order</h1>
+    <hr>
+
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-controller="Admin" asp-action="EditOrders" method="POST" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="OrderNumber" value="@Model.OrderNumber" />
+                <input type="hidden" name="OrderDate" value="@Model.OrderDate" />
+                <input type="hidden" name="UserId" value="@Model.UserId" />
+                <input type="hidden" name="cargoStatus" value="@Model.cargoStatus" />
+                <input type="hidden" name="FirstName" value="@Model.FirstName" />
+                <input type="hidden" name="LastName" value="@Model.LastName" />
+                <input type="hidden" name="Address" value="@Model.Address" />
+                <input type="hidden" name="City" value="@Model.City" />
+                <input type="hidden" name="Email" value="@Model.Email" />
+                <input type="hidden" name="Note" value="@Model.Note" />
+                <input type="hidden" name="PaymentId" value="@Model.PaymentId" />
+                <input type="hidden" name="ConversationId" value="@Model.ConversationId" />
+                <input type="hidden" name="Phone" value="@Model.Phone" />
+                <input type="hidden" name="OrderState" value="@Model.OrderState" />
+                <input type="hidden" name="PaymentType" value="@Model.PaymentType" />
+                <input type="hidden" name="OrderItems" value="@Model.OrderItems" />
+                <div class="form-group row">
+                    <label asp-for="cargoStatusId" class="col-sm-2 col-form-label"></label>
+                    <select asp-for="cargoStatusId" class="form-control" asp-items="@(new SelectList(ViewBag.cargoStatus,"Id","Status"))">
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="cargoFirm" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="cargoFirm">
+                        <span asp-validation-for="cargoFirm" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="trackingCode" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input class="form-control" asp-for="trackingCode">
+                        <span asp-validation-for="trackingCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="btn btn-primary">Save Order</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

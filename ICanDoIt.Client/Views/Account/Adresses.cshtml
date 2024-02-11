@@ -1,0 +1,51 @@
+﻿@model AdressModel
+@{
+    ViewData["Title"] = "Adresses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group pb-2">
+                <a href="/account/orders" class="list-group-item list-group-item-action">
+                    Orders
+                </a>
+                <a href="/account/ProfileInfo/@User.FindFirstValue(ClaimTypes.NameIdentifier)" class="list-group-item list-group-item-action">
+                    Profile Info
+                </a>
+                <a href="/account/PasswordChange" class="list-group-item list-group-item-action">
+                    Change Password
+                </a>
+                <a href="/account/adresses" class="list-group-item list-group-item-action">
+                    Adresess
+                </a>
+                <a href="/account/logout" class="list-group-item list-group-item-action">
+                    Logout
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h1>Adresses</h1>
+            <hr />
+            <a class="btn btn-primary btn-sm" href="/account/newadress">Add Adress</a>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 py-2">
+                @foreach (var item in Model.Adresses)
+                {
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@item.City</h6>
+                            <p class="card-text">@item.Adress</p>
+                            <a href="/account/editadress/@item.Id" class="card-link">Edit Adress</a>
+                            <a href="/account/deleteadress/@item.Id" class="card-link">Delete Adress</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

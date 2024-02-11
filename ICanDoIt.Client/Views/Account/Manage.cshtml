@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group pb-2">
+                    <a href="/account/orders" class="list-group-item list-group-item-action">
+                        Orders
+                    </a>
+                    <a href="/account/ProfileInfo/@User.FindFirstValue(ClaimTypes.NameIdentifier)" class="list-group-item list-group-item-action">
+                        Profile Info
+                    </a>
+                    <a href="/account/PasswordChange" class="list-group-item list-group-item-action">
+                        Change Password
+                    </a>
+                    <a href="/account/adresses" class="list-group-item list-group-item-action">
+                        Adresess
+                    </a>
+                    <a href="/account/logout" class="list-group-item list-group-item-action">
+                        Logout
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-9">
+               
+                
+            </div>
+        </div>
+    </div>
+
+

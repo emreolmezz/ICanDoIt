@@ -1,0 +1,56 @@
+﻿@model AddAdressModel
+@{
+    ViewData["Title"] = "NewAdress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+
+    <h1>NewAdress</h1>
+    <hr />
+    <form asp-controller="Account" asp-action="NewAdress" method="POST" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <label asp-for="Title" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Title">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="City" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="City">
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Town" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Town">
+                <span asp-validation-for="Town" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="Adress" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <textarea class="form-control" asp-for="Adress"></textarea>
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="ZipCode" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="ZipCode">
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Save Product</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+

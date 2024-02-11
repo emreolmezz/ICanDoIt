@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ProductListViewModel
+    <style>
+        .disableClick {
+            pointer-events: none;
+        }
+    </style>
+
+<div class="album py-5 bg-white">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3">
+                @await Component.InvokeAsync("Categories")
+            </div>
+            <div class="col-md-9">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                            <div class="block-4 text-center border">
+                                <figure class="block-4-image">
+                                    <a asp-controller="shop" asp-action="details" asp-route-url="@item.Url"><img src="~/Images/@item.ImageUrl" alt="Image placeholder" class="img-fluid"></a>
+                                </figure>
+                                <div class="block-4-text p-4">
+                                    <h3><a asp-controller="shop" asp-action="details" asp-route-url="@item.Url">@item.Name</a></h3>
+                                    <p class="text-primary font-weight-bold">$ @item.Price</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                @if (String.IsNullOrEmpty(Model.PageInfo.CurrentCategory))
+                                {
+                                    if (Model.PageInfo.CurrentPage == 1)
+                                    {
+                                        <li class="page-item"><a class="page-link disableClick" href="#">Previous</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><a class="page-link" href="/products?page=@(Model.PageInfo.CurrentPage-1)">Prev</a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    if (Model.PageInfo.CurrentPage == 1)
+                                    {
+                                        <li class="page-item"><a class="page-link disableClick" href="#">Prev</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><a class="page-link" href="@Model.PageInfo.CurrentCategory?page=@(Model.PageInfo.CurrentPage-1)">Prev</a></li>
+                                    }
+                                }
+                                @for (int i = 0; i < Model.PageInfo.TotalPages(); i++)
+                                {
+                                    @if (String.IsNullOrEmpty(Model.PageInfo.CurrentCategory))
+                                    {
+                                        <li class="page-item @(Model.PageInfo.CurrentPage==i+1?"active":"")">
+                                            <a class="page-link" href="/products?page=@(i+1)">
+                                                @(i+1)
+                                            </a>
+                                        </li>
+
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item @(Model.PageInfo.CurrentPage==i+1?"active":"")">
+                                            <a class="page-link" href="/products/@Model.PageInfo.CurrentCategory?page=@(i+1)">
+                                                @(i+1)
+                                            </a>
+                                        </li>
+                                    }
+
+                                }
+                                @if (String.IsNullOrEmpty(Model.PageInfo.CurrentCategory))
+                                {
+                                    if (Model.PageInfo.TotalPages() == Model.PageInfo.CurrentPage)
+                                    {
+                                        <li class="page-item"><a class="page-link disableClick" href="#">Next</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><a class="page-link" href="/products?page=@(Model.PageInfo.CurrentPage+1)">Next</a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    if (Model.PageInfo.TotalPages() == Model.PageInfo.CurrentPage)
+                                    {
+                                        <li class="page-item"><a class="page-link disableClick" href="#">Next</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item"><a class="page-link" href="@Model.PageInfo.CurrentCategory?page=@(Model.PageInfo.CurrentPage+1)">Next</a></li>
+                                    }
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@await Html.PartialAsync("_AdminNavbar")
+@await Html.PartialAsync("_AdminSideBar")
+
+
+<div class="content-wrapper container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h3">Users</h1>
+            <hr>
+            <table id="userTable" class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <td class="adminTd">User Id</td>
+                        <td class="adminTd">First Name</td>
+                        <td class="adminTd">Last Name</td>
+                        <td class="adminTd">Username</td>
+                        <td class="adminTd">Email</td>
+                        <td class="adminTd" style="width: 160px;"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="adminTd">@item.Id</td>
+                                <td class="adminTd">@item.FirstName</td>
+                                <td class="adminTd">@item.LastName</td>
+                                <td class="adminTd">@item.UserName</td>
+                                <td class="adminTd">@item.Email</td>
+                                <td class="adminTd">
+                                    <a href="/admin/edituser/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+
+                                    <form action="/admin/deleteproduct/@item.Id" method="POST" style="display: inline;">
+                                        <input type="hidden" name="productId" value="@item.Id">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                         }
+                     }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+

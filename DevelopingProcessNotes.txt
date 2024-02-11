@@ -1,0 +1,15 @@
+----------------------------------------------------------------------------------------------
+üye olunca mail doğrulaması istemicez ve duplicated email tarzı şeyler olduğunda hata mesajları ver.
+hata mesajlarını her yerde düzenle.
+decimal double a çevirildi ??? cart kısmında double'a çevirme söz konusu
+normal adres ve fatura adresi kısımları yapılabilirse yapılacak.
+----------------------------------------------------------------------------------------------
+success döndüğünde güzel bir mesaj ver ve belki mail adresine sipariş detayları gönderilebilir.
+kargo işlemleri yapıldı ücreti eklenicek.
+orders kullanıcada düzenlenecek sayfası düzenlenicek.
+idler atlayarak gidiyor ???
+çoklu fotoğraf sırası
+karttan ürün silerken sıkıntı oldu sonra durduk yere düzeldi ona bir daha bak
+
+
+

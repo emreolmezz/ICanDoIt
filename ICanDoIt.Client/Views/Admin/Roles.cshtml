@@ -1,0 +1,53 @@
+﻿@model IEnumerable<IdentityRole> 
+@{
+    ViewData["Title"] = "Roles";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@await Html.PartialAsync("_AdminNavbar")
+@await Html.PartialAsync("_AdminSideBar")
+
+<div class="content-wrapper container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h3">Roles</h1>
+            <hr>
+            <a class="btn btn-primary btn-sm" href="/admin/RoleCreate">Add Role</a>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <td style="width: 30px;">Id</td>
+                        <td style="width: 100px;">Role Name</td>
+                        <td style="width: 30px;"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                
+                                <td>
+                                    <a href="/admin/editrole/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+
+                                    <form action="/admin/deleterole/@item.Id" method="POST" style="display: inline;">
+                                        <input type="hidden" name="RoleId" value="@item.Id">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+

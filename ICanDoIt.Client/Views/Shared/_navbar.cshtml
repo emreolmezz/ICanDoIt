@@ -1,0 +1,93 @@
+﻿
+<nav class="navbar navbar-expand-md navbar-light">
+
+    <a class="navbar-brand" href="#!">
+        <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="30" alt="mdb logo">
+    </a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav13"
+            aria-controls="basicExampleNav13" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Breadcrumbs -->
+    <!-- Breadcrumbs -->
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="basicExampleNav13">
+
+        <div class="navbar-search pl-0 ml-auto mt-3 mb-2 mt-md-0 mb-md-0 mr-3">
+            <form class="navbar-form" role="search" action="/search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+          </div>
+
+        <!-- Right -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="/cart" class="nav-link navbar-link-2 waves-effect">
+                    <span class="badge badge-pill red">1</span>
+                    <i class="fas fa-shopping-cart pl-0"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#!" class="nav-link waves-effect">
+                    Shop
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#!" class="nav-link waves-effect">
+                    Contact
+                </a>
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        <a href="/admin/index" class="nav-link waves-effect">
+                            Admin Arayüzü
+                        </a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a href="/account/manage" class="nav-link waves-effect">
+                        @User.FindFirstValue(ClaimTypes.Email)
+                    </a>
+                </li>
+                <li class="nav-item pl-2 mb-2 mb-md-0 d-md-none d-xl-inline-block">
+                    <a href="/Account/Logout" type="button"
+                       class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                        Logout
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item d-md-none d-xl-inline-block">
+                    <a href="/Account/Login" class="nav-link waves-effect">
+                        Sign in
+                    </a>
+                </li>
+                <li class="nav-item pl-2 mb-2 mb-md-0 d-md-none d-xl-inline-block">
+                    <a href="/Account/Register" type="button"
+                       class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                        Sign
+                        up
+                    </a>
+                </li>
+            }
+
+        </ul>
+
+    </div>
+    <!-- Links -->
+
+</nav>

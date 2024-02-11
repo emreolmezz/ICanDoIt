@@ -1,0 +1,77 @@
+﻿@model AdminOrdersModel
+@{
+    ViewData["Title"] = "OngoingOrders";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@await Html.PartialAsync("_AdminNavbar")
+@await Html.PartialAsync("_AdminSideBar")
+
+<div class="content-wrapper container">
+    @if (TempData["message"] != null)
+    {
+        var message = JsonConvert.DeserializeObject<AlertMessage>(TempData["message"] as string);
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-@message.AlertType">
+                    @message.Message
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h3">Ongoing Orders</h1>
+            <hr>
+            <table id="productTable" class="table table-bordered mt-3" data-ordering="false">
+                <thead>
+                    <tr>
+                        <td class="adminTd">OrderDate</td>
+                        <td class="adminTd">OrderNumber</td>
+                        <td class="adminTd">First Name</td>
+                        <td class="adminTd">Last Name</td>
+                        <td class="adminTd">Ordered Item</td>
+                        <td class="adminTd" style="width: 150px;"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Orders.Count() > 0)
+                    {
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td class="adminTd">@order.OrderDate</td>
+                                <td class="adminTd">@order.OrderNumber</td>
+                                <td class="adminTd">@order.FirstName</td>
+                                <td class="adminTd">@order.LastName</td>
+                                <td class="adminTd">
+                                    @foreach (var item in order.OrderItems)
+                                    {
+
+                                        <h5>@item.Product.Name</h5>
+
+                                    }
+                                </td>
+
+                                <td class="adminTd">
+                                    <a href="/admin/OrderDetails/@order.Id" class="btn btn-primary btn-sm mr-2">Details</a>
+                                    <a href="/admin/EditOrders/@order.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <h3>No Orders</h3>
+                        </div>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+

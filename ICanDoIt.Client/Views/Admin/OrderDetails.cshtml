@@ -1,0 +1,74 @@
+﻿@model OrderListModel
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@await Html.PartialAsync("_AdminNavbar")
+@await Html.PartialAsync("_AdminSideBar")
+
+
+
+<div class="content-wrapper container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h3">Order Details</h1>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order Id: #@Model.OrderNumber</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var orderItem in Model.OrderItems)
+                    {
+                        <tr>
+                            <td><img src="~/Images/@orderItem.ImageUrl" alt="" width="50"></td>
+                            <td>
+                                @orderItem.Name
+                            </td>
+                            <td>@orderItem.Price</td>
+                            <td>@orderItem.Quantity</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">Customer Name: </td>
+                        <td>@Model.FirstName @Model.LastName</td>
+                        <td rowspan="6">Total: @Model.TotalPrice().ToString("c")</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Address: </td>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Email: </td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Phone: </td>
+                        <td>@Model.Phone</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Order Status: </td>
+                        <td>@Model.OrderState</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Payment Type </td>
+                        <td>@Model.PaymentType</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Cargo Status </td>
+                        <td>@ViewBag.cargoStatus[Model.cargoStatusId - 1].Status</td>
+                        <td><a href="/admin/EditOrders/@Model.OrderId" class="btn btn-primary btn-sm mr-2">Edit Cargo Status</a></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>

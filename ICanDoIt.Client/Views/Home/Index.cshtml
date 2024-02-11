@@ -1,0 +1,65 @@
+﻿@model ProductListViewModel
+
+
+
+<div class="site-blocks-cover" style="background-image: url(/images/hero_1.jpg);" data-aos="fade">
+    <div class="container">
+        <div class="row align-items-start align-items-md-center justify-content-end">
+            <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
+                <h1 class="mb-2">Finding Your Perfect Shoes</h1>
+                <div class="intro-text text-center text-md-left">
+                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla. </p>
+                    <p>
+                        <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="site-section block-3 site-blocks-2 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 site-section-heading text-center pt-4">
+                <h2 class="mb-3">Featured Products</h2>
+            </div>
+        </div>
+        <div class="row">
+                @foreach (var item in Model.Products)
+                {
+
+                <div class="col-sm-6 col-lg-4 mb-4">
+                    <div class="block-4 text-center border">
+                        <figure class="block-4-image">
+                            <a asp-controller="shop" asp-action="details" asp-route-url="@item.Url"><img src="~/Images/@item.ImageUrl" alt="Image placeholder" class="img-fluid"></a>
+                        </figure>
+                        <div class="block-4-text p-4">
+                            <h3><a asp-controller="shop" asp-action="details" asp-route-url="@item.Url">@item.Name</a></h3>
+                            <p class="text-primary font-weight-bold">$ @item.Price</p>
+                        </div>
+                    </div>
+                </div>
+
+                    @*<div class="card-footer text-center">
+                <a asp-controller="shop" asp-action="details" asp-route-url="@item.Url" class="btn btn-primary btn-sm">Details</a>
+                <form asp-controller="Cart" asp-action="AddToCart" method="POST" style="display: inline;">
+                    <input type="hidden" name="productId" value="@item.Id">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+                </form>
+            </div>*@
+
+
+                }
+            
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

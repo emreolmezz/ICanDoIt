@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+}
+
+@model ProductListViewModel
+
+
+<div class="album py-5 bg-white">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3">
+                @await Component.InvokeAsync("Categories")
+            </div>
+            <div class="col-md-9">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    @foreach (var item in Model.Products)
+                    {
+                    <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                        <div class="block-4 text-center border">
+                            <figure class="block-4-image">
+                                <a asp-controller="shop" asp-action="details" asp-route-url="@item.Url"><img src="~/Images/@item.ImageUrl" alt="Image placeholder" class="img-fluid"></a>
+                            </figure>
+                            <div class="block-4-text p-4">
+                                <h3><a asp-controller="shop" asp-action="details" asp-route-url="@item.Url">@item.Name</a></h3>
+                                <p class="text-primary font-weight-bold">$ @item.Price</p>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

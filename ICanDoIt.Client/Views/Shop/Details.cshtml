@@ -1,0 +1,54 @@
+﻿@model ProductDetailModel
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 border-end">
+                <div class="d-flex flex-column justify-content-center">
+
+                    <div class="main_image"> <img src="~/Images/@Model.ProductImages[0].ImageUrl" id="main_product_image" width="350"> </div>
+
+
+                    <div class="thumbnail_images">
+                        <ul id="thumbnail">
+                            @for (int i = 0; i < Model.ProductImages.Count(); i++)
+                            {
+                                <li><img onclick="changeImage(this)" src="~/Images/@Model.ProductImages[i].ImageUrl" width="70"></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 ml-3">
+                <h2 class="text-black">@Model.Product.Name</h2>
+                <div class="mt-2 pr-3 content">
+                    <p><a href="/products/@Model.Category.Url">@Model.Category.Name</a></p>
+                </div>
+                <p>      
+                    @Html.Raw(@Model.Product.Description)
+                </p>
+                <p><strong class="text-primary h4">@Model.Product.Price</strong></p>
+                <form asp-controller="Cart" asp-action="AddToCart" method="post" class="form-inline">
+                    <input type="hidden" name="productId" value="@Model.Product.Id">
+                    <div class="mb-5">
+                        <div class="input-group mb-3" style="max-width: 120px;">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                            </div>
+                            <input value="1" min="1" step="1" type="text" name="quantity" class="form-control text-center" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                            </div>
+                        </div>
+                        <button type="submit" class="buy-now btn btn-sm btn-primary my-2">
+                            Add To Cart
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
